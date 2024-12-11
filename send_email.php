@@ -1,9 +1,14 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $business = htmlspecialchars($_POST['business']);
+    $business = htmlspecialchars($_POST['firstname']);
     $country = htmlspecialchars($_POST['country']);
-    $email = htmlspecialchars($_POST['email']);
+    $email = htmlspecialchars($_POST['lastname']);
     $subject = htmlspecialchars($_POST['subject']);
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "Invalid email format";
+        exit;
+    }
 
     $to = "shasahasr@gmail.com";
     $email_subject = "Contact Form Submission from $business";

@@ -167,35 +167,56 @@
                 <div class="contact__container bd-grid">
                     <div class="contact__data">
                         <span class="section-subtitle contact__initial">Let's talk</span>
-                        <h2 class="section-title contact__initial">Contact us</h2>
-                        <p class="contact__description">If you have would like us to work on your inventory, send us an email!</p>
+                        <h2 class="section-title contact__initial">Contact Us</h2>
+                        <p class="contact__description">If you would like us to work on your inventory, send us a message!</p>
                     </div>
                 </div>
                 <div class="container">
-                    <form action="send_email.php" method="POST">
-                  
-                      <label for="bname">Business</label>
-                      <input type="text" id="fname" name="firstname" placeholder="Your Business's Name">
-                  
-                      <label for="country">Country</label>
-                      <select id="country" name="country">
-                        <option value="usa">USA</option>
-                        <option value="canada">Canada</option>
-                      </select>
-
-                      <label for="email">Email</label>
-                      <input type="text" id="lname" name="lastname" placeholder="example@example.com">
-                  
-                      <label for="subject">Subject</label>
-                      <textarea id="subject" name="subject" placeholder="Write something.." style="height:100px"></textarea>
-                  
-                      
-                      <div class="contact__button">
-                        <button type="submit" class="button">Submit</button>
-                      </div>
-                  
+                    <form action="https://api.web3forms.com/submit" method="POST">
+                        <input type="hidden" name="access_key" value="7a6776e3-da3c-4ae9-8271-1ea2f0be3b65">
+                        
+                        <label for="bname">Business</label>
+                        <input type="text" id="bname" name="Business Name" placeholder="Your Business's Name">
+                
+                        <label for="state">State</label>
+                        <select id="state" name="state">
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="Email" placeholder="example@example.com">
+                
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Write your message here..." style="height:100px; padding: 10px; vertical-align: top;"></textarea>
+                
+                        <div class="contact__button">
+                            <button type="submit" class="button">Submit</button>
+                        </div>
                     </form>
-                  </div>
+                </div>
+                
+                <script>
+                    const states = [
+                        "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", 
+                        "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", 
+                        "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", 
+                        "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", 
+                        "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", 
+                        "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", 
+                        "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", 
+                        "Wisconsin", "Wyoming", "District of Columbia", "Puerto Rico", "Guam", 
+                        "Northern Mariana Islands", "U.S. Virgin Islands", "American Samoa"
+                    ];
+                
+                    const stateSelect = document.getElementById('state');
+                
+                    states.forEach(state => {
+                        const option = document.createElement('option');
+                        option.value = state;
+                        option.textContent = state;
+                        stateSelect.appendChild(option);
+                    });
+                </script>
             </section>
         </main>
 
@@ -217,9 +238,9 @@
                     <h3 class="footer__title">Information</h3>
                     <ul>
                         <li><a href="#" class="footer__link">--</a></li>
-                        <li><a href="#" class="footer__link">Contact us</a></li>
-                        <li><a href="#" class="footer__link">Privacy policy</a></li>
-                        <li><a href="#" class="footer__link">Terms of services</a></li>
+                        <li><a href="#" class="footer__link">Contact Us</a></li>
+                        <li><a href="#" class="footer__link">Privacy Policy</a></li>
+                        <li><a href="#" class="footer__link">Terms of Services</a></li>
                     </ul>
                 </div>
 
