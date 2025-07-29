@@ -113,28 +113,54 @@ sr.reveal(
 	}
 )
 
-// Load environment variables (only needed if using Node.js or a build tool)
-if (typeof process !== 'undefined' && process.env) {
-	require('dotenv').config()
-}
+/*==================== EMAIL JS FORM HANDLING ====================*/
+document.addEventListener('DOMContentLoaded', function() {
+	// Initialize EmailJS with fallback configuration
+	const config = window.EMAILJS_CONFIG || {
+		serviceID: 'service_i02u47i',
+		templateID: 'template_kt8d3fo',
+		publicKey: '21k9-kywmfEfSN5HO'
+	};
 
-document.getElementById('contact-form').addEventListener('submit', function (event) {
-	event.preventDefault() // Prevent the default form submission
+	// Initialize EmailJS
+	if (typeof emailjs !== 'undefined') {
+		emailjs.init(config.publicKey);
+	}
 
-	const serviceID = 'service_i02u47i' // Replace with your EmailJS service ID
-	const templateID = 'template_kt8d3fo' // Replace with your EmailJS template ID
+	const contactForm = document.getElementById('contact-form');
+	if (contactForm) {
+		contactForm.addEventListener('submit', function (event) {
+			event.preventDefault(); // Prevent the default form submission
 
-	emailjs.sendForm(serviceID, templateID, this).then(
-		() => {
-			showPopup('Message sent successfully!')
-			this.reset() // Reset the form after submission
-		},
-		error => {
-			showPopup('Failed to send message. Please try again later.')
-			console.error('EmailJS Error:', error)
-		}
-	)
-})
+			// Check if EmailJS is loaded
+			if (typeof emailjs === 'undefined') {
+				showPopup('Email service is not available. Please try again later.');
+				return;
+			}
+
+			// Show loading state
+			const submitButton = this.querySelector('button[type="submit"]');
+			const originalText = submitButton.textContent;
+			submitButton.textContent = 'Sending...';
+			submitButton.disabled = true;
+
+			emailjs.sendForm(config.serviceID, config.templateID, this).then(
+				() => {
+					showPopup('Message sent successfully!');
+					this.reset(); // Reset the form after submission
+				},
+				error => {
+					showPopup('Failed to send message. Please try again later.');
+					console.error('EmailJS Error:', error);
+				}
+			).finally(() => {
+				// Reset button state
+				submitButton.textContent = originalText;
+				submitButton.disabled = false;
+			});
+		});
+	}
+});
 
 // Function to show the popup
 function showPopup (message) {
