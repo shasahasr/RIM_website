@@ -1,0 +1,112 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+	--color-primary: #10b981;
+	--color-primary-alt: #059669;
+	--color-primary-light: #d1fae5;
+
+	--color-title-light: #1f2937;
+	--color-title-dark: #f9fafb;
+
+	--color-text-light: #4b5563;
+	--color-text-dark: #d1d5db;
+	--color-text-lighter: #9ca3af;
+
+	--color-body-light: #f9fafb;
+	--color-body-dark: #111827;
+
+	--color-container-light: #ffffff;
+	--color-container-dark: #1f2937;
+
+	--font-body: 'Plus Jakarta Sans', sans-serif;
+
+	--shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+	--shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+	--shadow-soft-dark: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+	--shadow-hover-dark: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+
+	--z-index-tooltip: 10;
+	--z-index-fixed: 100;
+}
+
+@layer base {
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		@apply font-body text-base leading-relaxed bg-body-light text-text-light dark:bg-body-dark dark:text-text-dark transition-colors duration-300;
+	}
+
+	h1,
+	h2,
+	h3,
+	ul,
+	p {
+		@apply m-0;
+	}
+
+	ul {
+		@apply p-0 list-none;
+	}
+
+	a {
+		@apply no-underline;
+	}
+
+	img {
+		@apply max-w-full h-auto;
+	}
+}
+
+@layer components {
+	.section {
+		@apply py-16 px-0 md:pt-32;
+	}
+
+	.section-title {
+		@apply text-2xl md:text-4xl text-title-light dark:text-title-dark mb-6 text-center font-semibold;
+	}
+
+	.section-subtitle {
+		@apply block text-primary font-medium mb-2 text-center text-sm md:text-base;
+	}
+
+	.bd-container {
+		@apply max-w-5xl w-[calc(100%-2rem)] mx-auto md:mx-auto;
+	}
+
+	.bd-grid {
+		@apply grid gap-6;
+	}
+
+	.button {
+		@apply inline-block bg-primary text-white py-4 px-7 rounded-xl font-medium transition-all duration-300 shadow-lg hover:bg-primary-alt hover:-translate-y-0.5 hover:shadow-xl border-none cursor-pointer;
+	}
+
+	/* Custom Scrollbar for Webkit */
+	::-webkit-scrollbar {
+		width: 0.6rem;
+		background-color: var(--color-body-light);
+	}
+
+	.dark ::-webkit-scrollbar {
+		background-color: var(--color-body-dark);
+	}
+
+	::-webkit-scrollbar-thumb {
+		background-color: var(--color-text-lighter);
+		border-radius: 0.5rem;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background-color: var(--color-primary);
+	}
+
+	::selection {
+		background-color: var(--color-primary);
+		color: white;
+	}
+}
