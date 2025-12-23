@@ -3,29 +3,31 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-	--color-primary: #10b981;
-	--color-primary-alt: #059669;
-	--color-primary-light: #d1fae5;
+	--color-primary: #2563eb;
+	--color-primary-alt: #1d4ed8;
+	--color-primary-light: #dbeafe;
 
-	--color-title-light: #1f2937;
-	--color-title-dark: #f9fafb;
+	--color-title-light: #1d1d1f;
+	--color-title-dark: #f5f5f7;
 
-	--color-text-light: #4b5563;
-	--color-text-dark: #d1d5db;
-	--color-text-lighter: #9ca3af;
+	--color-text-light: #6e6e73;
+	--color-text-dark: #d2d2d7;
+	--color-text-lighter: #86868b;
 
-	--color-body-light: #f9fafb;
-	--color-body-dark: #111827;
+	--color-body-light: #fbfbfd;
+	--color-body-dark: #121212;
 
 	--color-container-light: #ffffff;
-	--color-container-dark: #1f2937;
+	--color-container-dark: #1e1e1e;
 
-	--font-body: 'Plus Jakarta Sans', sans-serif;
+	--font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue',
+		'Plus Jakarta Sans', sans-serif;
 
-	--shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-	--shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-	--shadow-soft-dark: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-	--shadow-hover-dark: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+	--shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+	--shadow-hover: 0 12px 24px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.08);
+	--shadow-soft-dark: 0 2px 8px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+	--shadow-hover-dark: 0 12px 24px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.4);
+	--shadow-button: 0 4px 14px rgba(37, 99, 235, 0.25);
 
 	--z-index-tooltip: 10;
 	--z-index-fixed: 100;
@@ -37,7 +39,52 @@
 	}
 
 	body {
-		@apply font-body text-base leading-relaxed bg-body-light text-text-light dark:bg-body-dark dark:text-text-dark transition-colors duration-300;
+		@apply font-body text-base leading-relaxed bg-body-light text-text-light dark:bg-body-dark dark:text-text-dark;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		text-rendering: optimizeLegibility;
+	}
+
+	/* Smooth theme transition animation */
+	html.theme-transitioning *,
+	html.theme-transitioning *::before,
+	html.theme-transitioning *::after {
+		transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+			border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1), color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+			fill 0.6s cubic-bezier(0.4, 0, 0.2, 1), stroke 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+	}
+
+	/* Prevent ghosting on header during theme transition - faster transition */
+	html.theme-transitioning header,
+	html.theme-transitioning header * {
+		transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1), color 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+	}
+
+	/* Improve fixed header/menu rendering to avoid ghosting during scroll */
+	header#header,
+	#nav-menu {
+		transform: translateZ(0);
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
+		will-change: transform;
+		contain: paint;
+	}
+
+	/* Smooth transitions for body and main elements */
+	body {
+		transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+			color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	/* Fade animation for theme transition overlay */
+	@keyframes fadeInOut {
+		0%,
+		100% {
+			opacity: 0;
+		}
+		50% {
+			opacity: 0.3;
+		}
 	}
 
 	h1,
@@ -61,29 +108,48 @@
 	}
 }
 
+@layer utilities {
+	/* Custom z-index utilities */
+	.z-fixed { z-index: var(--z-index-fixed); }
+	.z-tooltip { z-index: var(--z-index-tooltip); }
+}
+
 @layer components {
 	.section {
-		@apply py-16 px-0 md:pt-32;
+		@apply py-24 px-0 md:py-40;
 	}
 
 	.section-title {
-		@apply text-2xl md:text-4xl text-title-light dark:text-title-dark mb-6 text-center font-semibold;
+		@apply text-3xl md:text-5xl lg:text-6xl text-title-light dark:text-title-dark mb-8 text-center font-light tracking-tight leading-tight;
+		letter-spacing: -0.03em;
 	}
 
 	.section-subtitle {
-		@apply block text-primary font-medium mb-2 text-center text-sm md:text-base;
+		@apply block text-primary font-semibold mb-6 text-center text-xs md:text-sm uppercase tracking-[0.2em];
+		letter-spacing: 0.2em;
 	}
 
 	.bd-container {
-		@apply max-w-5xl w-[calc(100%-2rem)] mx-auto md:mx-auto;
+		@apply max-w-7xl w-[calc(100%-4rem)] mx-auto md:mx-auto;
 	}
 
 	.bd-grid {
-		@apply grid gap-6;
+		@apply grid gap-8 md:gap-12;
 	}
 
 	.button {
-		@apply inline-block bg-primary text-white py-4 px-7 rounded-xl font-medium transition-all duration-300 shadow-lg hover:bg-primary-alt hover:-translate-y-0.5 hover:shadow-xl border-none cursor-pointer;
+		@apply inline-flex items-center justify-center bg-primary text-white py-5 px-10 rounded-2xl font-medium transition-all duration-500 ease-out hover:bg-primary-alt hover:-translate-y-1 border-none cursor-pointer text-lg;
+		transform: translateZ(0);
+		will-change: transform;
+		box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+	}
+
+	.button:hover {
+		box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
+	}
+
+	.button:active {
+		@apply translate-y-0 scale-[0.98];
 	}
 
 	/* Custom Scrollbar for Webkit */
@@ -108,5 +174,89 @@
 	::selection {
 		background-color: var(--color-primary);
 		color: white;
+	}
+
+	/* Smooth image loading */
+	img {
+		transition: opacity 0.3s ease-in-out;
+	}
+
+	/* Enhanced focus states */
+	*:focus-visible {
+		outline: 2px solid var(--color-primary);
+		outline-offset: 2px;
+	}
+
+	/* Better link transitions - only on hover */
+	html:not(.theme-transitioning) a:hover {
+		transition: color 0.2s ease-in-out;
+	}
+
+	/* Smooth scroll behavior */
+	html {
+		scroll-behavior: smooth;
+	}
+
+	/* Animated gradient backgrounds */
+	@keyframes gradient-shift {
+		0%,
+		100% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+	}
+
+	/* Floating animation for subtle elements */
+	@keyframes float {
+		0%,
+		100% {
+			transform: translateY(0px);
+		}
+		50% {
+			transform: translateY(-20px);
+		}
+	}
+
+	/* Pulse animation */
+	@keyframes pulse-slow {
+		0%,
+		100% {
+			opacity: 1;
+		}
+		50% {
+			opacity: 0.7;
+		}
+	}
+
+	/* Image hover effects */
+	img {
+		transition: transform 0.3s ease, opacity 0.3s ease;
+	}
+
+	img:hover {
+		transform: scale(1.02);
+	}
+
+	/* Smooth transitions for interactive elements - but not colors during theme change */
+	button:not(.no-transition),
+	a:not(.no-transition),
+	input:not(.no-transition),
+	textarea:not(.no-transition),
+	select:not(.no-transition) {
+		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+			opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	/* Only transition colors on hover, not on theme change */
+	html:not(.theme-transitioning) button:hover,
+	html:not(.theme-transitioning) a:hover,
+	html:not(.theme-transitioning) input:hover,
+	html:not(.theme-transitioning) textarea:hover,
+	html:not(.theme-transitioning) select:hover {
+		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+			opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+			background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 	}
 }

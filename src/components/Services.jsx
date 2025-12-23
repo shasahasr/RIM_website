@@ -1,48 +1,91 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { motion, useAnimation } from 'framer-motion';
 import Reveal from './Reveal';
 import { ScaleIcon, NotificationIcon, RetroFitIcon } from './Icons';
+
+function ServiceCard({ delay, icon: Icon, title, description, iconKey }) {
+  const controls = useAnimation();
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  return (
+    <Reveal delay={delay} direction="up">
+      <motion.div 
+        className="group bg-container-light dark:bg-container-dark p-10 lg:p-14 rounded-3xl h-full flex flex-col"
+        onHoverStart={async () => {
+          if (isAnimating) return;
+          setIsAnimating(true);
+          await controls.start({
+            rotate: [0, -5, 5, -5, 0],
+            scale: [1, 1.1, 1],
+            transition: { duration: 0.8, ease: "easeInOut" }
+          });
+          setIsAnimating(false);
+        }}
+        whileHover={{ y: -12, transition: { type: "spring", stiffness: 300 } }}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay, duration: 0.6 }}
+      >
+        <motion.div 
+          className="mb-8"
+          animate={controls}
+        >
+          <Icon className="w-16 h-16 lg:w-20 lg:h-20 fill-primary" />
+        </motion.div>
+        <h3 className="text-2xl lg:text-3xl text-title-light dark:text-title-dark mb-6 font-light tracking-tight">
+          {title}
+        </h3>
+        <p className="text-text-light dark:text-text-dark text-lg leading-relaxed flex-grow">
+          {description}
+        </p>
+      </motion.div>
+    </Reveal>
+  );
+}
 
 export default function Services() {
   return (
     <section className="section bd-container" id="services">
-      <Reveal>
-        <span className="section-subtitle">Offering</span>
-        <h2 className="section-title">Our amazing services</h2>
+      <Reveal direction="fade">
+        <div className="text-center mb-20">
+          <motion.span 
+            className="section-subtitle mb-6 block"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            Offering
+          </motion.span>
+          <h2 className="text-5xl md:text-6xl lg:text-7xl text-title-light dark:text-title-dark font-light tracking-tight leading-tight">
+            Our Services
+          </h2>
+        </div>
       </Reveal>
 
-      <div className="bd-grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-10 mt-12">
-        <Reveal delay={0.1}>
-          <div className="text-center bg-container-light dark:bg-container-dark p-10 rounded-[1.25rem] shadow-soft dark:shadow-soft-dark transition-all duration-300 hover:-translate-y-1 hover:shadow-hover dark:hover:shadow-hover-dark h-full">
-            <ScaleIcon className="w-16 h-16 fill-primary mb-4 mx-auto" />
-            <h3 className="text-lg md:text-xl text-title-light dark:text-title-dark mb-2 font-medium">Our XyloBalance Scales</h3>
-            <p className="p-0 text-text-light dark:text-text-dark">
-              Our patent-pending design ensures quality, and confidence that your items will be
-              tracked accurately.
-            </p>
-          </div>
-        </Reveal>
-
-        <Reveal delay={0.2}>
-          <div className="text-center bg-container-light dark:bg-container-dark p-10 rounded-[1.25rem] shadow-soft dark:shadow-soft-dark transition-all duration-300 hover:-translate-y-1 hover:shadow-hover dark:hover:shadow-hover-dark h-full">
-            <NotificationIcon className="w-16 h-16 fill-primary mb-4 mx-auto -mt-1.5" />
-            <h3 className="text-lg md:text-xl text-title-light dark:text-title-dark mb-2 font-medium">Choice of Notification</h3>
-            <p className="p-0 text-text-light dark:text-text-dark">
-              Whether it be our app, your email, or straight to your phone's messages, we can cater
-              to your individual notification needs.
-            </p>
-          </div>
-        </Reveal>
-
-        <Reveal delay={0.3}>
-          <div className="text-center bg-container-light dark:bg-container-dark p-10 rounded-[1.25rem] shadow-soft dark:shadow-soft-dark transition-all duration-300 hover:-translate-y-1 hover:shadow-hover dark:hover:shadow-hover-dark h-full">
-            <RetroFitIcon className="w-16 h-16 fill-primary mb-4 mx-auto" />
-            <h3 className="text-lg md:text-xl text-title-light dark:text-title-dark mb-2 font-medium">Retro-fit Solutions</h3>
-            <p className="p-0 text-text-light dark:text-text-dark">
-              Based on your dispensers, boxes, or bins, we will retro-fit our product to fit yours.
-              Hassle-free.
-            </p>
-          </div>
-        </Reveal>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+        <ServiceCard
+          delay={0.1}
+          icon={ScaleIcon}
+          title="XyloBalance Scales"
+          description="Our patent-pending design ensures quality, and confidence that your items will be tracked accurately."
+          iconKey="scale"
+        />
+        <ServiceCard
+          delay={0.2}
+          icon={NotificationIcon}
+          title="Choice of Notification"
+          description="Whether it be our app, your email, or straight to your phone's messages, we can cater to your individual notification needs."
+          iconKey="notification"
+        />
+        <ServiceCard
+          delay={0.3}
+          icon={RetroFitIcon}
+          title="Retro-fit Solutions"
+          description="Based on your dispensers, boxes, or bins, we will retro-fit our product to fit yours. Hassle-free."
+          iconKey="retrofit"
+        />
       </div>
     </section>
   );

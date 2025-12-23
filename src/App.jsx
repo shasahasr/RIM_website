@@ -17,7 +17,6 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
   const [showPopup, setShowPopup] = useState(false);
-
   const { activeSection, isScrolled, showScrollTop } = useScrollActive();
 
   return (

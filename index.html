@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -36,6 +36,26 @@
 		/>
 
 		<title>Xylo - Simplify Your Inventory Management | Smart Scales & Notifications</title>
+
+		<!-- Early theme application to avoid flash of wrong theme -->
+		<script>
+			(function() {
+				try {
+					var t = localStorage.getItem('selected-theme');
+					var html = document.documentElement;
+					if (t === 'light') {
+						html.classList.remove('dark');
+					} else {
+						html.classList.add('dark');
+					}
+				} catch(e) {}
+			})();
+		</script>
+		<!-- Critical inline CSS for background so initial paint matches theme -->
+		<style>
+			html.dark, html.dark body { background-color: #121212; color: #d2d2d7; }
+			html:not(.dark), html:not(.dark) body { background-color: #fbfbfd; color: #6e6e73; }
+		</style>
 	</head>
 	<body>
 		<div id="root"></div>

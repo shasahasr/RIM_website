@@ -1,37 +1,104 @@
 import React from 'react';
 
 export default function Header({ theme, toggleTheme, menuOpen, setMenuOpen, activeSection, isScrolled }) {
+  const navLinks = ['about', 'services', 'clients', 'contact'];
+
   return (
-    <header className={`w-full fixed top-0 left-0 z-fixed bg-body-light dark:bg-body-dark transition-shadow duration-300 ${isScrolled ? 'shadow-md' : ''}`} id="header">
-      <nav className="max-w-5xl h-12 md:h-[4.5rem] flex justify-between items-center w-[calc(100%-2rem)] mx-auto">
-        <a href="#" className="text-title-light dark:text-title-dark font-medium hover:text-primary transition-colors">XYLO</a>
+    <header 
+      className={`w-full fixed top-0 left-0 z-[100] bg-body-light dark:bg-body-dark ${isScrolled ? 'border-b border-gray-200/50 dark:border-gray-800/50 shadow-sm' : ''}`} 
+      id="header"
+      style={{
+        transform: 'translateZ(0)',
+        backfaceVisibility: 'hidden',
+        WebkitBackfaceVisibility: 'hidden',
+        willChange: 'transform'
+      }}
+    >
+      <nav className="max-w-7xl h-14 md:h-16 lg:h-20 flex justify-between items-center w-[calc(100%-4rem)] mx-auto">
+        {/* Logo */}
+        <a 
+          href="#home" 
+          className="flex items-center hover:opacity-80 transition-opacity"
+        >
+          <img 
+            src="/assets/img/xylo-logo.png" 
+            alt="Xylo logo" 
+            className="h-[68px] md:h-[95px] lg:h-[122px] w-auto"
+          />
+        </a>
 
-        <div className={`fixed top-[-100%] left-0 w-full pt-6 pb-4 text-center bg-body-light dark:bg-body-dark transition-all duration-400 shadow-md rounded-b-2xl z-fixed md:static md:top-0 md:w-auto md:p-0 md:bg-transparent md:shadow-none md:flex ${menuOpen ? 'top-[3rem]' : ''}`} id="nav-menu">
-          <ul className="md:flex md:items-center">
-            <li className="mb-4 md:mb-0 md:ml-10">
-              <a href="#home" className={`text-title-light dark:text-title-dark font-medium hover:text-primary transition-colors ${activeSection === 'home' ? 'text-primary' : ''}`} onClick={() => setMenuOpen(false)}>Home</a>
-            </li>
-            <li className="mb-4 md:mb-0 md:ml-10">
-              <a href="#about" className={`text-title-light dark:text-title-dark font-medium hover:text-primary transition-colors ${activeSection === 'about' ? 'text-primary' : ''}`} onClick={() => setMenuOpen(false)}>About</a>
-            </li>
-            <li className="mb-4 md:mb-0 md:ml-10">
-              <a href="#services" className={`text-title-light dark:text-title-dark font-medium hover:text-primary transition-colors ${activeSection === 'services' ? 'text-primary' : ''}`} onClick={() => setMenuOpen(false)}>Services</a>
-            </li>
-            <li className="mb-4 md:mb-0 md:ml-10">
-              <a href="#clients" className={`text-title-light dark:text-title-dark font-medium hover:text-primary transition-colors ${activeSection === 'clients' ? 'text-primary' : ''}`} onClick={() => setMenuOpen(false)}>Clients</a>
-            </li>
-            <li className="mb-4 md:mb-0 md:ml-10">
-              <a href="#contact" className={`text-title-light dark:text-title-dark font-medium hover:text-primary transition-colors ${activeSection === 'contact' ? 'text-primary' : ''}`} onClick={() => setMenuOpen(false)}>Contact Us</a>
-            </li>
-
-            <li className="md:ml-4">
-              <i className={`bx ${theme === 'dark' ? 'bx-sun' : 'bx-moon'} text-xl cursor-pointer text-title-light dark:text-title-dark hover:text-primary transition-colors absolute right-4 top-7 md:static`} id="theme-button" onClick={toggleTheme}></i>
-            </li>
-          </ul>
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center gap-12">
+          {navLinks.map((section) => (
+            <a 
+              key={section}
+              href={`#${section}`} 
+              className={`text-title-light dark:text-title-dark font-normal hover:text-primary transition-colors text-base capitalize ${activeSection === section ? 'text-primary' : ''}`}
+            >
+              {section.charAt(0).toUpperCase() + section.slice(1)}
+            </a>
+          ))}
+          
+          <button
+            className="flex items-center justify-center w-10 h-10 text-2xl cursor-pointer text-title-light dark:text-title-dark hover:text-primary transition-colors"
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+          >
+            <i className={`bx ${theme === 'dark' ? 'bx-sun' : 'bx-moon'}`} />
+          </button>
         </div>
 
-        <div className="text-xl cursor-pointer text-title-light dark:text-title-dark md:hidden" id="nav-toggle" onClick={() => setMenuOpen(!menuOpen)}>
-          <i className="bx bx-menu"></i>
+        {/* Mobile Menu Toggle */}
+        <button 
+          className="text-2xl cursor-pointer text-title-light dark:text-title-dark md:hidden flex items-center justify-center w-10 h-10" 
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+        >
+          <i className={`bx ${menuOpen ? 'bx-x' : 'bx-menu'}`} />
+        </button>
+
+        {/* Mobile Navigation */}
+        <div 
+          className={`fixed left-0 w-full pt-8 pb-6 text-center bg-body-light dark:bg-body-dark transition-all duration-500 rounded-b-3xl shadow-lg md:hidden ${menuOpen ? 'top-[3.5rem] opacity-100 pointer-events-auto' : 'top-[-100%] opacity-0 pointer-events-none'}`}
+          style={{
+            transform: 'translateZ(0)',
+            backfaceVisibility: 'hidden',
+            WebkitBackfaceVisibility: 'hidden',
+            zIndex: 90
+          }}
+        >
+          {/* Mobile menu logo */}
+          <div className="mb-8 flex justify-center">
+            <img 
+              src="/assets/img/xylo-logo.png" 
+              alt="Xylo logo" 
+              className="h-12 w-auto"
+            />
+          </div>
+          
+          <ul className="space-y-6">
+            {navLinks.map((section) => (
+              <li key={section}>
+                <a 
+                  href={`#${section}`} 
+                  className={`text-title-light dark:text-title-dark font-normal hover:text-primary transition-colors text-base capitalize ${activeSection === section ? 'text-primary' : ''}`} 
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {section.charAt(0).toUpperCase() + section.slice(1)}
+                </a>
+              </li>
+            ))}
+            
+            <li className="flex items-center justify-center pt-4">
+              <button
+                className="flex items-center justify-center w-10 h-10 text-2xl cursor-pointer text-title-light dark:text-title-dark hover:text-primary transition-colors"
+                onClick={toggleTheme}
+                aria-label="Toggle theme"
+              >
+                <i className={`bx ${theme === 'dark' ? 'bx-sun' : 'bx-moon'}`} />
+              </button>
+            </li>
+          </ul>
         </div>
       </nav>
     </header>
