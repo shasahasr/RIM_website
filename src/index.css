@@ -20,7 +20,8 @@
 	--color-container-light: #ffffff;
 	--color-container-dark: #1e1e1e;
 
-	--font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue',
+	--font-body:
+		-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue',
 		'Plus Jakarta Sans', sans-serif;
 
 	--shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
@@ -49,15 +50,21 @@
 	html.theme-transitioning *,
 	html.theme-transitioning *::before,
 	html.theme-transitioning *::after {
-		transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-			border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1), color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-			fill 0.6s cubic-bezier(0.4, 0, 0.2, 1), stroke 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+		transition:
+			background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+			border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+			color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+			fill 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+			stroke 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
 	}
 
 	/* Prevent ghosting on header during theme transition - faster transition */
 	html.theme-transitioning header,
 	html.theme-transitioning header * {
-		transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1), color 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+		transition:
+			background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+			border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+			color 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
 	}
 
 	/* Improve fixed header/menu rendering to avoid ghosting during scroll */
@@ -72,7 +79,8 @@
 
 	/* Smooth transitions for body and main elements */
 	body {
-		transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+		transition:
+			background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
 			color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
@@ -110,8 +118,12 @@
 
 @layer utilities {
 	/* Custom z-index utilities */
-	.z-fixed { z-index: var(--z-index-fixed); }
-	.z-tooltip { z-index: var(--z-index-tooltip); }
+	.z-fixed {
+		z-index: var(--z-index-fixed);
+	}
+	.z-tooltip {
+		z-index: var(--z-index-tooltip);
+	}
 }
 
 @layer components {
@@ -232,7 +244,9 @@
 
 	/* Image hover effects */
 	img {
-		transition: transform 0.3s ease, opacity 0.3s ease;
+		transition:
+			transform 0.3s ease,
+			opacity 0.3s ease;
 	}
 
 	img:hover {
@@ -245,8 +259,10 @@
 	input:not(.no-transition),
 	textarea:not(.no-transition),
 	select:not(.no-transition) {
-		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-			opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		transition:
+			transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+			opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+			box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
 	/* Only transition colors on hover, not on theme change */
@@ -255,8 +271,24 @@
 	html:not(.theme-transitioning) input:hover,
 	html:not(.theme-transitioning) textarea:hover,
 	html:not(.theme-transitioning) select:hover {
-		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-			opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-			background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+		transition:
+			transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+			opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+			box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+			background-color 0.2s ease,
+			border-color 0.2s ease,
+			color 0.2s ease;
+	}
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
 	}
 }

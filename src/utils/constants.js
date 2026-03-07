@@ -1,7 +1,7 @@
 export const EMAILJS_CONFIG = {
-	serviceID: 'service_i02u47i',
-	templateID: 'template_kt8d3fo',
-	publicKey: '21k9-kywmfEfSN5HO'
+	serviceID: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+	templateID: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+	publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 };
 
 export const STATES = [

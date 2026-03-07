@@ -1,7 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 export default function Reveal({ children, delay = 0, className = "", direction = "up", scale = false }) {
+  const prefersReducedMotion = useReducedMotion();
+
+  if (prefersReducedMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
   const variants = {
     up: { initial: { opacity: 0, y: 50 }, animate: { opacity: 1, y: 0 } },
     down: { initial: { opacity: 0, y: -50 }, animate: { opacity: 1, y: 0 } },
@@ -18,10 +25,10 @@ export default function Reveal({ children, delay = 0, className = "", direction 
       initial={selectedVariant.initial}
       whileInView={selectedVariant.animate}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ 
-        duration: 0.8, 
-        delay, 
-        ease: [0.25, 0.46, 0.45, 0.94] 
+      transition={{
+        duration: 0.8,
+        delay,
+        ease: [0.25, 0.46, 0.45, 0.94]
       }}
       whileHover={scale ? { scale: 1.02 } : {}}
       className={className}

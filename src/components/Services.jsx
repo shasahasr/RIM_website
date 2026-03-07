@@ -1,38 +1,25 @@
-import React, { useState } from 'react';
-import { motion, useAnimation } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import Reveal from './Reveal';
 import { ScaleIcon, NotificationIcon, RetroFitIcon } from './Icons';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
-function ServiceCard({ delay, icon: Icon, title, description, iconKey }) {
-  const controls = useAnimation();
-  const [isAnimating, setIsAnimating] = useState(false);
+function ServiceCard({ delay, icon: Icon, title, description }) {
+  const prefersReducedMotion = useReducedMotion();
 
   return (
     <Reveal delay={delay} direction="up">
-      <motion.div 
-        className="group bg-container-light dark:bg-container-dark p-10 lg:p-14 rounded-3xl h-full flex flex-col"
-        onHoverStart={async () => {
-          if (isAnimating) return;
-          setIsAnimating(true);
-          await controls.start({
-            rotate: [0, -5, 5, -5, 0],
-            scale: [1, 1.1, 1],
-            transition: { duration: 0.8, ease: "easeInOut" }
-          });
-          setIsAnimating(false);
-        }}
-        whileHover={{ y: -12, transition: { type: "spring", stiffness: 300 } }}
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
+      <motion.div
+        className="group bg-container-light dark:bg-container-dark p-10 lg:p-14 rounded-3xl h-full flex flex-col shadow-soft dark:shadow-soft-dark hover:shadow-hover dark:hover:shadow-hover-dark transition-shadow duration-500"
+        whileHover={prefersReducedMotion ? {} : { y: -12, transition: { type: "spring", stiffness: 300 } }}
+        initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
+        whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay, duration: 0.6 }}
       >
-        <motion.div 
-          className="mb-8"
-          animate={controls}
-        >
-          <Icon className="w-16 h-16 lg:w-20 lg:h-20 fill-primary" />
-        </motion.div>
+        <div className="mb-8">
+          <Icon className="w-16 h-16 lg:w-20 lg:h-20 text-primary" />
+        </div>
         <h3 className="text-2xl lg:text-3xl text-title-light dark:text-title-dark mb-6 font-light tracking-tight">
           {title}
         </h3>
@@ -49,7 +36,7 @@ export default function Services() {
     <section className="section bd-container" id="services">
       <Reveal direction="fade">
         <div className="text-center mb-20">
-          <motion.span 
+          <motion.span
             className="section-subtitle mb-6 block"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -70,21 +57,18 @@ export default function Services() {
           icon={ScaleIcon}
           title="XyloBalance Scales"
           description="Our patent-pending design ensures quality, and confidence that your items will be tracked accurately."
-          iconKey="scale"
         />
         <ServiceCard
           delay={0.2}
           icon={NotificationIcon}
           title="Choice of Notification"
           description="Whether it be our app, your email, or straight to your phone's messages, we can cater to your individual notification needs."
-          iconKey="notification"
         />
         <ServiceCard
           delay={0.3}
           icon={RetroFitIcon}
           title="Retro-fit Solutions"
           description="Based on your dispensers, boxes, or bins, we will retro-fit our product to fit yours. Hassle-free."
-          iconKey="retrofit"
         />
       </div>
     </section>
