@@ -27,8 +27,8 @@ export default function Header({ theme, toggleTheme, menuOpen, setMenuOpen, acti
           className="flex items-center hover:opacity-80 transition-opacity"
         >
           <img
-            src="/assets/img/xylo-logo.png"
-            alt="Xylo logo"
+            src="/assets/img/rimfixtures-logo.png"
+            alt="RIM Fixtures logo"
             className="h-[68px] md:h-[95px] lg:h-[122px] w-auto"
           />
         </a>
@@ -85,8 +85,8 @@ export default function Header({ theme, toggleTheme, menuOpen, setMenuOpen, acti
           {/* Mobile menu logo */}
           <div className="mb-8 flex justify-center">
             <img
-              src="/assets/img/xylo-logo.png"
-              alt="Xylo logo"
+              src="/assets/img/rimfixtures-logo.png"
+              alt="RIM Fixtures logo"
               className="h-12 w-auto"
             />
           </div>

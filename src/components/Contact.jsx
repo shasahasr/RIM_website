@@ -129,7 +129,7 @@ export default function Contact({ setPopupMessage, setShowPopup, setPopupVariant
           transition={{ duration: 0.6 }}
         >
           <form id="contact-form" ref={formRef} onSubmit={sendEmail} noValidate className="grid gap-8 bg-container-light dark:bg-container-dark p-10 md:p-16 rounded-3xl">
-            <input type="hidden" name="brand_name" value="Xylo" />
+            <input type="hidden" name="brand_name" value="RIM Fixtures" />
             {/* Name */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}

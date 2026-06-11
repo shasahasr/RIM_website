@@ -46,7 +46,7 @@ export default function Home() {
               whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              Xylo
+              RIM Fixtures
             </motion.h1>
           </Reveal>
 

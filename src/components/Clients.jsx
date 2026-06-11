@@ -25,8 +25,8 @@ export default function Clients() {
             transition={{ type: "spring", stiffness: 300 }}
           >
             <motion.img
-              src="/assets/img/grouppicxylo.JPG"
-              alt="Xylo team working with Tiesta Tea partnership"
+              src="/assets/img/grouppicrimfixtures.JPG"
+              alt="RIM Fixtures team working with Tiesta Tea partnership"
               loading="lazy"
               className="w-full rounded-3xl shadow-2xl"
               whileHover={prefersReducedMotion ? {} : {

@@ -12,8 +12,9 @@ const Services = lazy(() => import('./components/Services'));
 const Clients = lazy(() => import('./components/Clients'));
 const Contact = lazy(() => import('./components/Contact'));
 const Footer = lazy(() => import('./components/Footer'));
+const AssignFlavor = lazy(() => import('./components/AssignFlavor'));
 
-function App() {
+function MarketingSite() {
   const { theme, toggleTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
@@ -62,6 +63,21 @@ function App() {
       />
     </>
   );
+}
+
+function App() {
+  const isAssignPage =
+    typeof window !== 'undefined' && window.location.pathname === '/assign';
+
+  if (isAssignPage) {
+    return (
+      <Suspense fallback={<div className="min-h-screen bg-body-light dark:bg-body-dark" />}>
+        <AssignFlavor />
+      </Suspense>
+    );
+  }
+
+  return <MarketingSite />;
 }
 
 export default App;

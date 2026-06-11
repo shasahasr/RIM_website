@@ -8,17 +8,17 @@ export default function Footer() {
         <div className="text-center md:text-left">
           <a href="#home" className="block mb-4">
             <img
-              src="/assets/img/xylo-logo.png"
-              alt="Xylo logo"
+              src="/assets/img/rimfixtures-logo.png"
+              alt="RIM Fixtures logo"
               className="h-10 md:h-12 lg:h-14 w-auto mx-auto md:mx-0"
             />
           </a>
           <span className="block text-base mb-8 text-text-light dark:text-text-dark">Inventory Simplified.</span>
           <div className="flex items-center justify-center md:justify-start gap-6">
-            <a href="https://www.facebook.com/profile.php?id=61558002881860" target="_blank" rel="noopener noreferrer" className="text-title-light dark:text-title-dark hover:text-primary transition-all duration-300 hover:scale-110 inline-block">
+            <a href="https://www.facebook.com/rimfixtures" target="_blank" rel="noopener noreferrer" className="text-title-light dark:text-title-dark hover:text-primary transition-all duration-300 hover:scale-110 inline-block">
               <IconFacebook className="w-6 h-6" />
             </a>
-            <a href="https://www.instagram.com/buyxylo/" target="_blank" rel="noopener noreferrer" className="text-title-light dark:text-title-dark hover:text-primary transition-all duration-300 hover:scale-110 inline-block">
+            <a href="https://www.instagram.com/rimfixtures/" target="_blank" rel="noopener noreferrer" className="text-title-light dark:text-title-dark hover:text-primary transition-all duration-300 hover:scale-110 inline-block">
               <IconInstagram className="w-6 h-6" />
             </a>
           </div>
@@ -41,7 +41,7 @@ export default function Footer() {
           </ul>
         </div>
       </div>
-      <p className="text-center text-sm text-text-lighter mt-20 pt-8 border-t border-gray-200/30 dark:border-gray-800/30">&copy; {new Date().getFullYear()} Xylo. All rights reserved</p>
+      <p className="text-center text-sm text-text-lighter mt-20 pt-8 border-t border-gray-200/30 dark:border-gray-800/30">&copy; {new Date().getFullYear()} RIM Fixtures. All rights reserved</p>
     </footer>
   );
 }

@@ -55,7 +55,7 @@ export default function Services() {
         <ServiceCard
           delay={0.1}
           icon={ScaleIcon}
-          title="XyloBalance Scales"
+          title="RIM Fixtures Balance Scales"
           description="Our patent-pending design ensures quality, and confidence that your items will be tracked accurately."
         />
         <ServiceCard
