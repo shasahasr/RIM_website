@@ -7,6 +7,11 @@
 	--color-primary-alt: #1d4ed8;
 	--color-primary-light: #dbeafe;
 
+	/* Brand gradient (pulled from the logo mark) */
+	--color-brand-cyan: #06b6d4;
+	--color-brand-blue: #2563eb;
+	--color-brand-purple: #7c3aed;
+
 	--color-title-light: #1d1d1f;
 	--color-title-dark: #f5f5f7;
 
@@ -126,9 +131,71 @@
 	}
 }
 
+@layer utilities {
+	/* Brand gradient text */
+	.text-gradient {
+		background-image: linear-gradient(120deg, var(--color-brand-cyan), var(--color-brand-blue) 45%, var(--color-brand-purple));
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
+
+	/* Brand gradient surface */
+	.brand-gradient-bg {
+		background-image: linear-gradient(120deg, var(--color-brand-cyan), var(--color-brand-blue) 45%, var(--color-brand-purple));
+	}
+
+	/* Frosted glass surface */
+	.glass {
+		background-color: rgba(255, 255, 255, 0.7);
+		backdrop-filter: saturate(180%) blur(20px);
+		-webkit-backdrop-filter: saturate(180%) blur(20px);
+	}
+	.dark .glass {
+		background-color: rgba(18, 18, 18, 0.65);
+	}
+
+	/* Subtle dotted grid background */
+	.grid-bg {
+		background-image: radial-gradient(circle at center, rgba(37, 99, 235, 0.12) 1px, transparent 1px);
+		background-size: 32px 32px;
+	}
+	.dark .grid-bg {
+		background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+	}
+}
+
 @layer components {
 	.section {
 		@apply py-24 px-0 md:py-40;
+	}
+
+	/* Gradient pill button */
+	.button-gradient {
+		@apply inline-flex items-center justify-center gap-2 text-white py-5 px-10 rounded-2xl font-medium transition-all duration-300 ease-out hover:-translate-y-1 border-none cursor-pointer text-lg;
+		background-image: linear-gradient(120deg, var(--color-brand-cyan), var(--color-brand-blue) 50%, var(--color-brand-purple));
+		background-size: 160% 160%;
+		background-position: 0% 50%;
+		transform: translateZ(0);
+		will-change: transform, background-position;
+		box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
+	}
+	.button-gradient:hover {
+		background-position: 100% 50%;
+		box-shadow: 0 14px 34px rgba(124, 58, 237, 0.4);
+	}
+	.button-gradient:active {
+		@apply translate-y-0 scale-[0.98];
+	}
+
+	/* Secondary / ghost button */
+	.button-ghost {
+		@apply inline-flex items-center justify-center gap-2 py-5 px-10 rounded-2xl font-medium text-lg cursor-pointer transition-all duration-300 border-2 border-gray-200 dark:border-gray-700 text-title-light dark:text-title-dark hover:border-primary hover:-translate-y-1;
+	}
+
+	/* Eyebrow chip */
+	.eyebrow {
+		@apply inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs md:text-sm font-semibold uppercase tracking-[0.18em] text-primary border border-primary/20 bg-primary/5;
 	}
 
 	.section-title {

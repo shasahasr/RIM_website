@@ -12,7 +12,7 @@ export default function Clients() {
         <div className="text-center mb-20">
           <span className="section-subtitle mb-6">Partnership</span>
           <h2 className="text-5xl md:text-6xl lg:text-7xl text-title-light dark:text-title-dark font-light tracking-tight leading-tight">
-            Current Client
+            Trusted by <span className="text-gradient">great brands</span>
           </h2>
         </div>
       </Reveal>
@@ -38,8 +38,17 @@ export default function Clients() {
         </Reveal>
         <Reveal delay={0.2} direction="left">
           <div className="order-1 lg:order-2">
+            <motion.span
+              className="eyebrow mb-6"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.25, duration: 0.6 }}
+            >
+              Current client
+            </motion.span>
             <motion.h3
-              className="text-5xl md:text-6xl lg:text-7xl text-title-light dark:text-title-dark mb-8 font-light tracking-tight leading-tight"
+              className="text-5xl md:text-6xl lg:text-7xl text-title-light dark:text-title-dark mb-8 mt-6 font-light tracking-tight leading-tight"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -63,7 +72,7 @@ export default function Clients() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-4 px-8 py-4 bg-container-light dark:bg-container-dark border-2 border-gray-200 dark:border-gray-700 rounded-2xl font-medium text-lg text-title-light dark:text-title-dark group"
-              whileHover={prefersReducedMotion ? {} : { scale: 1.05, borderColor: "rgb(16, 185, 129)", y: -2 }}
+              whileHover={prefersReducedMotion ? {} : { scale: 1.05, borderColor: "rgb(37, 99, 235)", y: -2 }}
               whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
               transition={{ type: "spring", stiffness: 400 }}
             >

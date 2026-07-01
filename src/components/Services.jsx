@@ -10,20 +10,26 @@ function ServiceCard({ delay, icon: Icon, title, description }) {
   return (
     <Reveal delay={delay} direction="up">
       <motion.div
-        className="group bg-container-light dark:bg-container-dark p-10 lg:p-14 rounded-3xl h-full flex flex-col shadow-soft dark:shadow-soft-dark hover:shadow-hover dark:hover:shadow-hover-dark transition-shadow duration-500"
+        className="group relative bg-container-light dark:bg-container-dark p-10 lg:p-12 rounded-3xl h-full flex flex-col shadow-soft dark:shadow-soft-dark hover:shadow-hover dark:hover:shadow-hover-dark transition-all duration-500 border border-transparent hover:border-primary/20 overflow-hidden"
         whileHover={prefersReducedMotion ? {} : { y: -12, transition: { type: "spring", stiffness: 300 } }}
         initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
         whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay, duration: 0.6 }}
       >
-        <div className="mb-8">
-          <Icon className="w-16 h-16 lg:w-20 lg:h-20 text-primary" />
+        {/* Gradient wash on hover */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" aria-hidden="true"
+          style={{ background: 'radial-gradient(120% 80% at 100% 0%, rgba(37,99,235,0.07), transparent 60%)' }}
+        />
+        <div className="relative mb-8 w-16 h-16 lg:w-18 lg:h-18 rounded-2xl brand-gradient-bg flex items-center justify-center shadow-button"
+          style={{ width: '4rem', height: '4rem' }}
+        >
+          <Icon className="w-8 h-8 lg:w-9 lg:h-9 text-white" />
         </div>
-        <h3 className="text-2xl lg:text-3xl text-title-light dark:text-title-dark mb-6 font-light tracking-tight">
+        <h3 className="relative text-2xl lg:text-3xl text-title-light dark:text-title-dark mb-5 font-light tracking-tight">
           {title}
         </h3>
-        <p className="text-text-light dark:text-text-dark text-lg leading-relaxed flex-grow">
+        <p className="relative text-text-light dark:text-text-dark text-lg leading-relaxed flex-grow">
           {description}
         </p>
       </motion.div>
@@ -45,9 +51,13 @@ export default function Services() {
           >
             Offering
           </motion.span>
-          <h2 className="text-5xl md:text-6xl lg:text-7xl text-title-light dark:text-title-dark font-light tracking-tight leading-tight">
-            Our Services
+          <h2 className="text-5xl md:text-6xl lg:text-7xl text-title-light dark:text-title-dark font-light tracking-tight leading-tight mb-6">
+            What we <span className="text-gradient">deliver</span>
           </h2>
+          <p className="text-text-light dark:text-text-dark text-xl leading-relaxed max-w-2xl mx-auto">
+            Precision hardware, flexible alerts, and a fit made for your setup — everything
+            you need to never run out unexpectedly again.
+          </p>
         </div>
       </Reveal>
 
@@ -55,7 +65,7 @@ export default function Services() {
         <ServiceCard
           delay={0.1}
           icon={ScaleIcon}
-          title="RIM Fixtures Balance Scales"
+          title="RIM Fixtures Inventory Scales"
           description="Our patent-pending design ensures quality, and confidence that your items will be tracked accurately."
         />
         <ServiceCard

@@ -8,6 +8,7 @@ import ScrollTop from './components/ScrollTop';
 import Popup from './components/Popup';
 
 const About = lazy(() => import('./components/About'));
+const HowItWorks = lazy(() => import('./components/HowItWorks'));
 const Services = lazy(() => import('./components/Services'));
 const Clients = lazy(() => import('./components/Clients'));
 const Contact = lazy(() => import('./components/Contact'));
@@ -43,6 +44,7 @@ function MarketingSite() {
         <Home />
         <Suspense fallback={<div className="min-h-[50vh]" />}>
           <About />
+          <HowItWorks />
           <Services />
           <Clients />
           <Contact

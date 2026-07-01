@@ -110,25 +110,57 @@ export default function Contact({ setPopupMessage, setShowPopup, setPopupVariant
   return (
     <section className="section bd-container" id="contact">
       <Reveal>
-        <div className="text-center mb-20">
+        <div className="text-center mb-16">
           <span className="section-subtitle mb-6">Get in touch</span>
           <h2 className="text-5xl md:text-6xl lg:text-7xl text-title-light dark:text-title-dark font-light tracking-tight leading-tight mb-8">
-            Contact Us
+            Let's simplify <span className="text-gradient">your inventory</span>
           </h2>
           <p className="text-text-light dark:text-text-dark text-xl leading-relaxed max-w-2xl mx-auto">
-            If you would like us to work on your inventory, send us a message!
+            Tell us about your bins, boxes, or dispensers and we'll show you how RIM Fixtures fits in.
           </p>
         </div>
       </Reveal>
-      <Reveal delay={0.2} direction="up">
-        <motion.div
-          className="max-w-3xl mx-auto"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <form id="contact-form" ref={formRef} onSubmit={sendEmail} noValidate className="grid gap-8 bg-container-light dark:bg-container-dark p-10 md:p-16 rounded-3xl">
+
+      <div className="grid lg:grid-cols-5 gap-10 lg:gap-14 items-start max-w-6xl mx-auto">
+        {/* Info panel */}
+        <Reveal delay={0.1} direction="right" className="lg:col-span-2">
+          <div className="rounded-3xl brand-gradient-bg p-10 text-white h-full flex flex-col">
+            <h3 className="text-2xl md:text-3xl font-light tracking-tight mb-4">Talk to the team</h3>
+            <p className="text-white/85 text-lg leading-relaxed mb-8">
+              Whether you're piloting one shelf or rolling out nationwide, we'll retro-fit a
+              solution around what you already have.
+            </p>
+            <ul className="space-y-5 mt-auto">
+              <li className="flex items-center gap-3">
+                <span className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center shrink-0">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </span>
+                <span className="text-white/90">Real-time depletion alerts, your way</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <span className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center shrink-0">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z" />
+                    <circle cx="12" cy="11" r="2.5" strokeWidth={1.8} />
+                  </svg>
+                </span>
+                <span className="text-white/90">Deploying with partners nationwide</span>
+              </li>
+            </ul>
+          </div>
+        </Reveal>
+
+        {/* Form */}
+        <Reveal delay={0.2} direction="up" className="lg:col-span-3">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <form id="contact-form" ref={formRef} onSubmit={sendEmail} noValidate className="grid gap-6 bg-container-light dark:bg-container-dark p-8 md:p-12 rounded-3xl shadow-soft dark:shadow-soft-dark">
             <input type="hidden" name="brand_name" value="RIM Fixtures" />
             {/* Name */}
             <motion.div
@@ -257,17 +289,18 @@ export default function Contact({ setPopupMessage, setShowPopup, setPopupVariant
             >
               <motion.button
                 type="submit"
-                className="button text-lg px-10 py-5"
+                className="button-gradient text-lg px-10 py-5"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 400 }}
               >
-                Submit
+                Send message
               </motion.button>
             </motion.div>
-          </form>
-        </motion.div>
-      </Reveal>
+            </form>
+          </motion.div>
+        </Reveal>
+      </div>
     </section>
   );
 }
