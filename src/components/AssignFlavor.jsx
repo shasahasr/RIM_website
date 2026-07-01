@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { useTheme } from '../hooks/useTheme';
+import Logo from './Logo';
 
 const OTHER_VALUE = '__other__';
 
@@ -88,11 +89,7 @@ export default function AssignFlavor() {
     <main className="min-h-screen bg-body-light px-5 py-8 text-title-light dark:bg-body-dark dark:text-title-dark">
       <section className="mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-md flex-col justify-center">
         <div className="mb-8 flex justify-center">
-          <img
-            src="/assets/img/rimfixtures-logo.png"
-            alt="RIM Fixtures"
-            className="h-20 w-auto"
-          />
+          <Logo markClass="h-12 w-12" wordClass="text-2xl" />
         </div>
 
         <form
